@@ -4,7 +4,8 @@ class MoviesController < ApplicationController
 
   # GET /movies or /movies.json
   def index
-    @movies = Movie.order(sort_column + " " + sort_direction)
+    # don't sort by default
+    @movies = sort_column ? Movie.order(sort_column + " " + sort_direction) : Movie.all
   end
 
   # GET /movies/1 or /movies/1.json
@@ -70,8 +71,7 @@ class MoviesController < ApplicationController
     end
 
     def sort_column
-      puts(Movie.column_names)
-      Movie.column_names.include?(params[:sort]) ? params[:sort] : "title"
+      Movie.column_names.include?(params[:sort]) ? params[:sort] : nil
     end
     
     def sort_direction
