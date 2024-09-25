@@ -5,6 +5,13 @@ class MoviesController < ApplicationController
   # GET /movies or /movies.json
   def index
     # don't sort by default
+    if params[:sort]
+      session[:sort] = params[:sort]
+    end
+    if params[:direction]
+      session[:direction] = params[:direction]
+    end
+
     @movies = sort_column ? Movie.order(sort_column + " " + sort_direction) : Movie.all
   end
 
@@ -71,10 +78,10 @@ class MoviesController < ApplicationController
     end
 
     def sort_column
-      Movie.column_names.include?(params[:sort]) ? params[:sort] : nil
+      Movie.column_names.include?(session[:sort]) ? session[:sort] : nil
     end
     
     def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+      %w[asc desc].include?(session[:direction]) ? session[:direction] : "asc"
     end
 end

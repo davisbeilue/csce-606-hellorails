@@ -4,6 +4,17 @@
 table, th, td {
   border: 1px solid black;
 }
+.current {
+  background-color: #F0DA84;
+  color: #000000;
+}
+.current.asc::after {
+  content: " /\\";
+}
+.current.desc::after {
+  content: " \\/";
+}
+
 </style>
 
 <h1>Movies</h1>
@@ -29,7 +40,7 @@ table, th, td {
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="3"><%= link_to "New movie", new_movie_path %></td>
+        <td colspan="3"><%= button_to "New movie", new_movie_path, style: "background-color: cyan; color: black;"  %></td>
       </tr>
     </tfoot>
   </table>
