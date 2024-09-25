@@ -1,14 +1,20 @@
 <p style="color: green"><%= notice %></p>
 
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
 <h1>Movies</h1>
 
 <div id="movies">
   <table>
     <thead>
       <tr>
-        <th>Title</th>
-        <th>Rating</th>
-        <th>Release Date</th>
+        <th><%= sortable "title", "Title" %></th>
+        <th><%= sortable "rating", "Rating" %></th>
+        <th><%= sortable "release_date", "Release Date" %></th>
       </tr>
     </thead>
     <tbody>
@@ -23,10 +29,8 @@
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="3">Total Movies: <%= @movies.count %></td>
+        <td colspan="3"><%= link_to "New movie", new_movie_path %></td>
       </tr>
     </tfoot>
   </table>
 </div>
-
-<%= link_to "New movie", new_movie_path %>
